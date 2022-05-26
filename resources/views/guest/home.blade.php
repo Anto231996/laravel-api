@@ -10,97 +10,45 @@
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
 
         <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Nunito', sans-serif;
-                font-weight: 200;
-                height: 100vh;
-                margin: 0;
-            }
+        <link rel="stylesheet" href="{{asset('css/app.css')}}">
 
-            .full-height {
-                height: 100vh;
-            }
-
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
-
-            .position-ref {
-                position: relative;
-            }
-
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .content {
-                text-align: center;
-            }
-
-            .title a {
-                font-size: 84px;
-                text-decoration: none;
-                color: #636b6f;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 13px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
     </head>
     <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                            <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                {{ __('Logout') }}
-                            </a>
-
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                @csrf
-                            </form>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
-                    @endauth
-                </div>
-            @endif
-
-            <div class="content">
-                @if (Auth::check())
-                    Benvenuto {{ Auth::user()["name"] }}!
-                @endif
-                
-                <div class="title m-b-md">
-                    <a href="{{route('admin.posts.index')}}">Blog</a>
-                </div>
-
-                <div class="links">
+            <header>
+                @if (Route::has('login'))
+                    <nav class="d-flex justify-content-center align-items-center gap-4 fs-2">
+                        @auth
+                            <a class="text-black text-decoration-none" href="{{ url('/home') }}">Home</a>
+                            <a class="text-black text-decoration-none" href="{{route('admin.posts.index')}}">Blog</a>
+                        @else
+                            <a class="text-black text-decoration-none" href="{{ route('login') }}">Login</a>
     
-                </div>
-            </div>
+                            @if (Route::has('register'))
+                                <a class="text-black text-decoration-none" href="{{ route('register') }}">Register</a>
+                            @endif
+                        @endauth
+                    </nav>
+                @endif
+    
+                    {{--  <div class="content">
+                    @if (Auth::check())
+                        Benvenuto {{ Auth::user()["name"] }}!
+                    @endif
+                    
+                    <div class="title m-b-md">
+                        <a href="{{route('admin.posts.index')}}">Blog</a>
+                    </div>
+    
+                    <div class="links">
+        
+                    </div>
+                    </div> --}}
+            </header>
+
+        <div id="root">
+            
         </div>
+
+        <script src="{{asset('js/front.js')}}"></script>
     </body>
 </html>
